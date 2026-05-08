@@ -23,6 +23,31 @@ def read_titanic_data():
 
     return df.to_dict(orient="records")
 
+
+@app.get("/titanic/count")
+def read_titanic_count(): 
+    james = James()
+    count = james.get_count()
+
+    return {"count": count}
+
+
+@app.get("/titanic/count/survived")
+def read_titanic_count_survived():
+    james = James()
+    count_survived = james.get_count_survived()
+
+    return {"count_survived": count_survived}
+
+
+@app.get("/titanic/count/dead")
+def read_titanic_count_dead():
+    james = James()
+    count_dead = james.get_count_dead()
+
+    return {"count_dead": count_dead}
+
+
 @app.get("/doro/data")
 def read_doro_data():
     dorodirector = DoroDirector()
@@ -34,5 +59,5 @@ def read_doro_data():
 if __name__ == "__main__":
     import uvicorn
 
-    
+
     uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)

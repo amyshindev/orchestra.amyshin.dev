@@ -1,12 +1,10 @@
 from fastapi import FastAPI
-import pandas as pd
-from pathlib import Path
+
 
 try:
     from .doro_reader import DoroReader
 except ImportError:
     from doro_reader import DoroReader
-
 
 
 app = FastAPI(title="Doro Data")
