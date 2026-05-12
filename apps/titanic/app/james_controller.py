@@ -1,32 +1,21 @@
 from fastapi import FastAPI
 
-
-try:
-    from .walter_reader import WalterReader
-except ImportError:
-    from walter_reader import WalterReader
-
-try:
-    from .rose_model import model_file_exists
-except ImportError:
-    from rose_model import model_file_exists
-
-try:
-    from .jack_service import JackService
-except ImportError:
-    from jack_service import JackService
-
-
+from titanic.app.jack_service import JackService
 app = FastAPI(title="Titanic (James)")
 
 
 class JamesController:
     def __init__(self):
-        self.jack = JackService()
+        self.service = JackService()
 
-    def has_decision_tree_model(self):
-        """저장된 결정트리 모델 파일 존재 여부 반환."""
-        return model_file_exists()
+    def get_data(self):
+        return self.service.get_data()
 
-    def get_training_model_name(self):
-        return self.jack.get_training_model_name()
+    def get_count(self):
+        return self.service.get_count()
+
+    def has_decision_tree_model(self) -> bool:
+        return self.service.has_decision_tree_model()
+
+    def get_model_name_and_accuracy(self):
+        return self.service.get_model_name_and_accuracy()
